@@ -1,19 +1,9 @@
 const mongoose = require('mongoose');
 
-const connectToMongo = async() =>{
-    try{
-        await mongoose.connect('mongodb+srv://tanishq:admin@cluster0.p4vtfdh.mongodb.net/paytm');
-        console.log("Connected to MongoDB");
-    }
-    catch(error){
-        console.log("Error connecting to MongoDB", error.message);
-        
-    }
-};
+mongoose.connect('mongodb+srv://tanishq:admin@cluster0.p4vtfdh.mongodb.net/paytm');
 
-
-const userSchema = new mongoose.Schema({
-    userName: {
+const userSchema = mongoose.Schema({
+    username: {
         type: String,
         required: true,
         trim: true,
@@ -28,13 +18,13 @@ const userSchema = new mongoose.Schema({
         minLength: 6
     },
     firstName: {
-        type: true,
+        type: String,
         required: true,
         trim: true,
         maxLength: 50
     },
     lastName: {
-        type: true,
+        type: String,
         required: true,
         trim: true,
         maxLength: 50

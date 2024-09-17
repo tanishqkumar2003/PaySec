@@ -33,6 +33,11 @@ router.post("/signup", async (req, res) => {
     })
     const userId = user._id;
 
+    await Account.create({
+        userId,
+        balance: 1 + Math.random() * 10000
+    })
+
     const token = jwt.sign({
         userId
     }, JWT_SECRET);
@@ -87,5 +92,32 @@ router.put("/", authMiddleware, async(req, res)=>{
         message: "Updated Successfully"
     })
 })
+
+// get users from the backend, filterable via firstName/lastName
+router.get("/bulk", async(req, res)=>{
+    const filter = req.query.filter || "";
+
+    const users = await User.find({
+        $or: [{
+            firstName: {
+                "$regex": filter
+            }
+        }, {
+            lastName: {
+                "$regex": filter
+            }
+        }]
+    })
+
+    res.json({
+        user: users.map(user =>({
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            _id: user._id
+        }))
+    })
+})
+
 
 module.exports = router;

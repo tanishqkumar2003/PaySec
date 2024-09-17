@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config()
 
-mongoose.connect('mongodb+srv://tanishq:admin@cluster0.p4vtfdh.mongodb.net/paytm');
+mongoose.connect(process.env.MONGO_URI)
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -29,7 +30,9 @@ const userSchema = new mongoose.Schema({
         trim: true,
         maxLength: 50
     }
-})
+}, {
+    timestamps: true 
+});
 
 
 const accountSchema = new mongoose.Schema({
@@ -42,6 +45,8 @@ const accountSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
+}, {
+    timestamps: true 
 });
 
 

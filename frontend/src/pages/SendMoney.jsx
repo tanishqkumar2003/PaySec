@@ -1,9 +1,11 @@
 import React from 'react'
-
-function SendMoney() {
+import{Send} from '../components/Send'
+export function SendMoney() {
   return (
-    <div>SendMoney</div>
+    <>
+      <Send/>
+    </>
+    
   )
 }
 
-export default SendMoney

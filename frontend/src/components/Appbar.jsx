@@ -12,6 +12,8 @@ export const Appbar = () => {
         navigate("/info");
     };
 
+    const token = localStorage.getItem("token");
+
     return (
         <div className="bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg h-16 flex justify-between items-center p-4  rounded-b-lg">
             <div className="text-3xl font-bold text-white">
@@ -27,7 +29,7 @@ export const Appbar = () => {
                     onClick={handleLogout} 
                     className="bg-red-600 text-white font-semibold py-2 px-6 rounded-md shadow transition duration-200 hover:bg-red-700"
                 >
-                    Logout
+                    {token ? "Logout" : "Login"}
                 </button>
             </div>
         </div>

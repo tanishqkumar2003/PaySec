@@ -94,7 +94,7 @@ router.put("/", authMiddleware, async(req, res)=>{
 })
 
 // get users from the backend, filterable via firstName/lastName
-router.get("/bulk", async(req, res)=>{
+router.get("/bulk",authMiddleware, async(req, res)=>{
     const filter = req.query.filter || "";
 
     const users = await User.find({
@@ -117,6 +117,39 @@ router.get("/bulk", async(req, res)=>{
             _id: user._id
         }))
     })
+})
+
+
+router.get("/info" ,authMiddleware, async(req, res)=>{
+    const user = await User.findOne({
+        _id: req.userId
+    })
+    if(!user){
+        res.status(410).json({
+            message: "User not found"
+        })
+    }
+    else{
+        res.json({
+            user
+        })
+    }
+})
+
+
+router.get("/accinfo" ,authMiddleware, async(req, res)=>{
+    
+    const account = await Account.findOne({ userId: req.userId });
+    if(!account){
+        res.status(410).json({
+            message: "Account info not found"
+        })
+    }
+    else{
+        res.json({
+            account
+        })
+    }
 })
 
 

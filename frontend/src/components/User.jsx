@@ -15,7 +15,7 @@ export const Users = () => {
         .then(response => {
             setUsers(response.data.user)
         })
-    }, [filter])
+    },[filter])
 
     return <>
         <div className="font-bold mt-6 text-lg">

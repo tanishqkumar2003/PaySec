@@ -4,11 +4,13 @@ import { Balance } from '../components/Balance'
 import { Users } from '../components/User'
 
 export const Dashboard= ()=> {
-  return <div className='ml-28 mr-28 m-6'>
-    <Appbar/>
+  return <>
+  <Appbar/>
+  <div className='ml-28 mr-28 m-6'>
     <div className='m-8'>
-      <Balance value={"10,000"} />
+      <Balance value={localStorage.getItem("balance")} />
       <Users/>
     </div>
   </div>
+  </>
 }

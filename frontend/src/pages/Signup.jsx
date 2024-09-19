@@ -45,10 +45,10 @@ export const Signup = () => {
               password
             });
             localStorage.setItem("token", response.data.token)
-            navigate("/dashboard")
+            navigate("/info")
           }} label={"Sign up"} />
         </div>
-        <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
+        <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/"} />
       </div>
     </div>
   </div>

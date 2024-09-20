@@ -27,12 +27,17 @@ export const Signin = () => {
 
         <div className="pt-4">
           <Button onClick={async ()=>{
-            const response = await axois.post("http://localhost:3000/api/v1/user/signin", {
+            const response = await axois.post("https://paysec-backend.onrender.com/api/v1/user/signin", {
               username,
               password
             });
+            if(!response.data.token){
+              alert("Wrong Credentials  Try again")
+            }
+            else if(response.data.token){
             localStorage.setItem("token", response.data.token)
             navigate("/info")
+            }
           }}  label={"Sign in"} />
         </div>
         <BottomWarning label={"Don't have an account?"} buttonText={"Sign up"} to={"/signup"} />

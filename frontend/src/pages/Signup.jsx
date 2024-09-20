@@ -38,7 +38,7 @@ export const Signup = () => {
 
         <div className="pt-4">
           <Button onClick={async ()=>{
-            const response = await axois.post("http://localhost:3000/api/v1/user/signup", {
+            const response = await axois.post("/api/v1/user/signup", {
               username,
               firstName,
               lastName,

@@ -43,16 +43,21 @@ export const Send = () => {
                     />
                     </div>
                     <button onClick={()=>{
-                        axios.post("https://paysec-backend.onrender.com/api/v1/account/transfer",{
-                            to: id,
-                            amount
-                        },{
-                            headers:{
-                                Authorization: "Bearer " + localStorage.getItem("token")
-                            }
-                        })
-                        alert("Transaction Successful");
-                        navigate("/dashboard")
+                        if(amount){
+                            axios.post("https://paysec-backend.onrender.com/api/v1/account/transfer",{
+                                to: id,
+                                amount
+                            },{
+                                headers:{
+                                    Authorization: "Bearer " + localStorage.getItem("token")
+                                }
+                            })
+                            alert("Transaction Successful");
+                            navigate("/info")
+                        }
+                        else{
+                            alert("Enter some amount")
+                        }
                     }} class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
                         Initiate Transfer
                     </button>

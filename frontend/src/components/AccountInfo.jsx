@@ -14,7 +14,9 @@ export const AccountInfo = () => {
             setInfo(response.data.account);
         });
     }, []);
-    localStorage.setItem("balance", info.balance)
+    useEffect(()=>{
+        localStorage.setItem("balance", info.balance)
+    },[info])
         
     const formatDateTime = (dateString) => {
         const date = new Date(dateString);

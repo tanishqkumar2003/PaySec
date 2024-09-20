@@ -14,6 +14,30 @@ export const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const handleSignUp = async () => {
+    try {
+        const response = await axois.post("https://paysec-backend.onrender.com/api/v1/user/signup", {
+            username,
+            firstName,
+            lastName,
+            password
+        });
+
+        localStorage.setItem("token", response.data.token);
+        console.log(localStorage.length);
+
+        if (localStorage.length > 0) {
+            navigate("/info");
+        } else {
+            alert("Invalid inputs. Try again");
+            console.log("Token not set in local storage.");
+        }
+    } catch (error) {
+        alert("Invalid inputs Please try again.");
+        console.error("Sign-up error:", error);
+    }
+};
+
 
     return <div className="bg-slate-300 h-screen flex justify-center">
     <div className="flex flex-col justify-center">
@@ -37,16 +61,30 @@ export const Signup = () => {
         }} placeholder="123456" label={"Password"} />
 
         <div className="pt-4">
-          <Button onClick={async ()=>{
-            const response = await axois.post("/api/v1/user/signup", {
-              username,
-              firstName,
-              lastName,
-              password
-            });
-            localStorage.setItem("token", response.data.token)
-            navigate("/info")
-          }} label={"Sign up"} />
+          <Button onClick={async () => {
+    try {
+        const response = await axois.post("https://paysec-backend.onrender.com/api/v1/user/signup", {
+            username,
+            firstName,
+            lastName,
+            password
+        });
+
+        localStorage.setItem("token", response.data.token);
+        console.log(localStorage.length);
+
+        if (localStorage.length > 0) {
+            navigate("/info");
+        } else {
+            alert("Invalid inputs. Try again");
+            console.log("Token not set in local storage.");
+        }
+    } catch (error) {
+        alert("Invalid inputs Please try again.");
+        console.error("Sign-up error:", error);
+    }
+}
+} label={"Sign up"} />
         </div>
         <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/"} />
       </div>

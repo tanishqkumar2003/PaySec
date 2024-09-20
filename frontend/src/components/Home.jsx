@@ -15,16 +15,16 @@ export const HomePage = () => {
     const logo = "https://thumbs.dreamstime.com/b/initial-letter-ps-logo-vector-designs-premium-logo-designs-initial-letter-ps-logo-vector-designs-169657808.jpg"
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-blue-500 to-blue-800 text-center p-8">
-            <img
-                src={logo}
+            {/* <img
+                src='./ps.jpg'
                 alt="PaySec Logo"
                 className="h-24 mb-6 transition duration-500 ease-in-out transform hover:scale-110 shadow-lg"
-            />
+            /> */}
             <h1 className="text-6xl font-bold text-white mb-2 transition duration-500 ease-in-out transform hover:scale-105">
                 PaySec
             </h1>
-            <p className="text-xl text-gray-200 mb-10 transition duration-500 ease-in-out transform hover:scale-105">
-                Pay Securely, Pay in Seconds
+            <p className="text-2xl m-6 text-gray-200 mb-10 transition duration-500 ease-in-out transform hover:scale-105">
+            Pay Securely in Seconds with PaySec
             </p>
             <div className="flex flex-col items-center space-y-6">
                 <div className="transition duration-300 transform hover:scale-105">

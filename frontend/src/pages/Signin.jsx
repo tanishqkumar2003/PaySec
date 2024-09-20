@@ -31,8 +31,13 @@ export const Signin = () => {
               username,
               password
             });
+            if(!response.data.token){
+              alert("Wrong Credentials  Try again")
+            }
+            else if(response.data.token){
             localStorage.setItem("token", response.data.token)
             navigate("/info")
+            }
           }}  label={"Sign in"} />
         </div>
         <BottomWarning label={"Don't have an account?"} buttonText={"Sign up"} to={"/signup"} />

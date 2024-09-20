@@ -31,11 +31,11 @@ export const Signin = () => {
               username,
               password
             });
-            if(!response.data.token){
-              alert("Wrong Credentials  Try again")
-            }
-            else if(response.data.token){
             localStorage.setItem("token", response.data.token)
+            if(response.data.token == undefined){
+              alert("Wrong Credentials  Try again")
+            } 
+            else{
             navigate("/info")
             }
           }}  label={"Sign in"} />

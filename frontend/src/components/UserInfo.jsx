@@ -54,7 +54,7 @@ export const UserInfo = () => {
                                 </div>
                             </div>
                         ) : (
-                            <p className="text-red-500 text-center mt-4">No user information available.</p>
+                            <p className="text-red-500 text-center mt-4">No user information available <br/>Login to see your details</p>
                         )}
                     </div>
                 </div>

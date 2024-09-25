@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const { signupBody, signinBody, updateBody } = require("./types");
 const { authMiddleware } = require('../middleware');
+const bcrypt = require("bcrypt");
 
 
 router.post("/signup", async (req, res) => {
@@ -25,9 +26,12 @@ router.post("/signup", async (req, res) => {
         })
     }
 
+    const password = req.body.password;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await User.create({
         username: req.body.username,
-        password: req.body.password,
+        password: hashedPassword,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
     })
@@ -60,11 +64,22 @@ router.post("/signin", async (req, res) => {
                 message: "Incorrect Inputs"
             })
         }
+        // const password =  req.body.password
+        
 
         const user = await User.findOne({
             username: req.body.username,
-            password: req.body.password
+            // password: req.body.password
         })
+
+        const password = req.body.password;
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (!isPasswordMatch) {
+          return res.status(411).json({
+            message: "incorrect password",
+          });
+        }
+
         if(user){
             const token = jwt.sign({
                 userId: user._id

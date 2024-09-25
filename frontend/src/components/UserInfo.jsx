@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { AccountInfo } from "./AccountInfo";
 import { useNavigate } from "react-router-dom";
-import { Appbar } from "../components/Appbar";
+import { Appbar } from "./AppBar";
+// import { Appbar } from "../components/Appbar";
 
 export const UserInfo = () => {
     const [info, setInfo] = useState({});
@@ -29,7 +30,7 @@ export const UserInfo = () => {
     
     return (
         <>
-            <Appbar />
+            <Appbar/>
             <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
                 <div className="max-w-md mx-auto">
                     <div className="flex justify-between items-center mb-6">

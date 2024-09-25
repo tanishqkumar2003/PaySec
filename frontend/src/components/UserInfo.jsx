@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { AccountInfo } from "./AccountInfo";
 import { useNavigate } from "react-router-dom";
-import { Appbar } from "./AppBar";
-import { TransactionHistory } from "../pages/TransactionHistory";
+import { Appbar } from "../components/Appbar";
 
 export const UserInfo = () => {
     const [info, setInfo] = useState({});
@@ -25,13 +24,12 @@ export const UserInfo = () => {
     }
 
     const handleTransactionHistory = () => {
-        navigate("/history");
+        navigate("/history"); // Adjust to your actual route
     };
     
     return (
         <>
             <Appbar />
-            <TransactionHistory/>
             <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
                 <div className="max-w-md mx-auto">
                     <div className="flex justify-between items-center mb-6">
@@ -65,16 +63,16 @@ export const UserInfo = () => {
                     <div className="mt-6">
                         <AccountInfo />
                     </div>
-                    <div className="text-center mt-6">
+                    <div className="text-center mt-6 space-y-4">
                         <button 
                             onClick={handleSendMoney} 
-                            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200 w-full md:w-auto"
+                            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200 w-full"
                         >
                             Send Money
                         </button>
                         <button 
                             onClick={handleTransactionHistory} 
-                            className="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 transition duration-200 w-full md:w-auto mt-4"
+                            className="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 transition duration-200 w-full"
                         >
                             View Transaction History
                         </button>

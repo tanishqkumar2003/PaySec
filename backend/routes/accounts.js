@@ -1,5 +1,5 @@
 const express = require('express');
-const { Account } = require('../db');
+const { Account, Transaction, User } = require('../db');
 const { authMiddleware } = require('../middleware');
 const { mongoose } = require('mongoose');
 const router = express.Router();
@@ -41,8 +41,23 @@ router.post("/transfer", authMiddleware, async (req, res)=>{
 
     await session.commitTransaction();
 
+    const transactionTime = account.updatedAt;
+    const transactionTo = await User.findOne({_id: to});
+    const transactionFrom = await User.findOne({_id: req.userId})
+
+    await Transaction.updateOne({userId: req.userId}, {$push:{transactionTime: transactionTime}})
+    await Transaction.updateOne({userId: req.userId}, {$push:{transactionTo: transactionTo.firstName}})
+    await Transaction.updateOne({userId: req.userId}, {$push:{transactionAmount: amount}})
+    await Transaction.updateOne({userId: req.userId}, {$push:{transactionType: "Sent"}})
+
+    await Transaction.updateOne({userId: to}, {$push:{transactionTime: transactionTime}})
+    await Transaction.updateOne({userId: to}, {$push:{transactionTo: transactionFrom.firstName}})
+    await Transaction.updateOne({userId: to}, {$push:{transactionAmount: amount}})
+    await Transaction.updateOne({userId: to}, {$push:{transactionType: "Received"}})
+
     res.json({
-        message: "Transfer Sucessful "
+        message: "Transfer Sucessful ",
+        transactionFrom
     })
 });
 

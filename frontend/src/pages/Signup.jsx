@@ -16,7 +16,7 @@ export const Signup = () => {
   const navigate = useNavigate();
   const handleSignUp = async () => {
     try {
-        const response = await axois.post("https://paysec-backend.onrender.com/api/v1/user/signup", {
+        const response = await axois.post("http://localhost:3000/api/v1/user/signup", {
             username,
             firstName,
             lastName,
@@ -63,7 +63,7 @@ export const Signup = () => {
         <div className="pt-4">
           <Button onClick={async () => {
     try {
-        const response = await axois.post("https://paysec-backend.onrender.com/api/v1/user/signup", {
+        const response = await axois.post("http://localhost:3000/api/v1/user/signup", {
             username,
             firstName,
             lastName,

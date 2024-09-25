@@ -5,7 +5,7 @@ export const AccountInfo = () => {
     const [info, setInfo] = useState({});
 
     useEffect(() => {
-        axios.get("https://paysec-backend.onrender.com/api/v1/user/accinfo", {
+        axios.get("http://localhost:3000/api/v1/user/accinfo", {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },

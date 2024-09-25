@@ -56,10 +56,19 @@ router.post("/transfer", authMiddleware, async (req, res)=>{
     await Transaction.updateOne({userId: to}, {$push:{transactionType: "Received"}})
 
     res.json({
-        message: "Transfer Sucessful ",
-        transactionFrom
+        message: "Transfer Sucessful "
     })
 });
+
+router.get('/transactions', authMiddleware, async (req, res) => {
+    try {
+        const transactions = await Transaction.find({ userId: req.userId });
+        res.json(transactions);
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+});
+
 
 
 module.exports = router;

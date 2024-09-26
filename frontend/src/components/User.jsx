@@ -30,12 +30,12 @@ export const Users = () => {
         />
     </div>
     <div className="mt-4">
-        {users.length > 0 ? (
-            users.map(user => <User key={user._id} user={user} />)
-        ) : (
-            <p className="text-gray-500 text-center mt-4">No users found</p>
-        )}
-    </div>
+    {users.length > 0 ? (
+        users.slice(0, 5).map(user => <User key={user._id} user={user} />)
+    ) : (
+        <p className="text-gray-500 text-center mt-4">No users found</p>
+    )}
+</div>
 </>
 }
 

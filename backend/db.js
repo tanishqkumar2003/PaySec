@@ -49,11 +49,28 @@ const accountSchema = new mongoose.Schema({
     timestamps: true 
 });
 
+const transactionHstory = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    transactionTime:[],
+    transactionTo:[],
+    transactionAmount:[],
+    transactionType:[{ 
+        type: String,
+        enum: ['Sent', 'Received'] 
+    }]
+})
+
 
 const User = mongoose.model('User', userSchema);
-const Account = mongoose.model('Account', accountSchema)
+const Account = mongoose.model('Account', accountSchema);
+const Transaction = mongoose.model('Transaction', transactionHstory)
 
 module.exports = {
     User,
-    Account
+    Account,
+    Transaction
 }

@@ -7,6 +7,7 @@ import { UserInfo } from "./components/UserInfo"
 import { HomePage } from "./components/Home"
 import { AboutUs } from "./components/AboutUs"
 import { ContactUs } from "./components/ContactUs"
+import { TransactionHistory } from "./pages/TransactionHistory"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/info" element={<UserInfo/>} />
             <Route path="/about" element={<AboutUs/>} />
             <Route path="/contact" element={<ContactUs/>} />
+            <Route path="/history" element={<TransactionHistory/>} />
         </Routes>
       </BrowserRouter>
     </>

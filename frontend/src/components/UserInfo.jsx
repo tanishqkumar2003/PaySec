@@ -10,7 +10,7 @@ export const UserInfo = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/user/info", {
+        axios.get("https://paysec-backend.onrender.com/api/v1/user/info", {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },

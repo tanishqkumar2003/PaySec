@@ -10,7 +10,7 @@ export const TransactionHistory = () => {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/account/transactions", {
+                const response = await axios.get("https://paysec-backend.onrender.com/api/v1/account/transactions", {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("token"),
                     },

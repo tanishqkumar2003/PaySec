@@ -12,16 +12,15 @@ export const HomePage = () => {
         navigate("/signin");
     };
 
-    const logo = "https://thumbs.dreamstime.com/b/initial-letter-ps-logo-vector-designs-premium-logo-designs-initial-letter-ps-logo-vector-designs-169657808.jpg";
 
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-blue-900 via-blue-600 to-blue-400 p-8">
-            {/* Logo Section */}
+            {/* Logo Section
             <img
-                src={logo}
+                src={`${process.env.PUBLIC_URL}/a.webp`}
                 alt="PaySec Logo"
                 className="h-24 w-24 mb-6 rounded-full transition duration-500 ease-in-out transform hover:scale-110 shadow-lg"
-            />
+            /> */}
 
             {/* Title and Subtitle */}
             <h1 className="text-6xl font-bold text-white mb-4 transition duration-500 ease-in-out transform hover:scale-105">

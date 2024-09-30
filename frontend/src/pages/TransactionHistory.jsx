@@ -47,8 +47,8 @@ export const TransactionHistory = () => {
     return (
         <>
             <Appbar />
-            <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
-                <div className="max-w-md mx-auto">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 via-blue-600 to-blue-400 p-6">
+                <div className="max-w-4xl mx-auto w-full">
                     <div className="bg-white shadow-lg rounded-lg p-6 mt-8">
                         <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Transaction History</h2>
                         {loading && <div className="text-center text-gray-500">Loading...</div>}
@@ -69,24 +69,24 @@ export const TransactionHistory = () => {
                                 <tbody>
                                     {transactions.map((transaction, index) => (
                                         <tr key={index} className="border-b hover:bg-gray-100 transition duration-200">
-                                            <td className="">
+                                            <td className="px-4 py-2">
                                                 {transaction.transactionTime.map((time, i) => (
-                                                    <div className="px-4 py-2" key={i}>{formatDateTime(time)}</div>
+                                                    <div key={i}>{formatDateTime(time)}</div>
                                                 ))}
                                             </td>
                                             <td className="px-4 py-2">
                                                 {transaction.transactionTo.map((to, i) => (
-                                                    <div className="p-3" key={i}>{to || 'N/A'}</div>
+                                                    <div key={i}>{to || 'N/A'}</div>
                                                 ))}
                                             </td>
-                                            <td className="">
+                                            <td className="px-4 py-2">
                                                 {transaction.transactionAmount.map((amount, i) => (
-                                                    <div className="px-4 py-2" key={i}>Rs. {amount || 0}</div>
+                                                    <div key={i}>Rs. {amount || 0}</div>
                                                 ))}
                                             </td>
-                                            <td className="">
+                                            <td className="px-4 py-2">
                                                 {transaction.transactionType.map((type, i) => (
-                                                    <div className="px-4 py-2" key={i}>{type || 'N/A'}</div>
+                                                    <div key={i}>{type || 'N/A'}</div>
                                                 ))}
                                             </td>
                                         </tr>
@@ -100,4 +100,3 @@ export const TransactionHistory = () => {
         </>
     );
 };
-

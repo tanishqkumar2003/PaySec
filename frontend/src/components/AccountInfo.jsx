@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 export const AccountInfo = () => {
     const [info, setInfo] = useState({});
 
     useEffect(() => {
-        axios.get("https://paysec-backend.onrender.com/api/v1/user/accinfo", {
+        axios.get(`${BACKEND_URL}/user/accinfo`, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },

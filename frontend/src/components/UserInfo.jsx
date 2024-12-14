@@ -3,6 +3,7 @@ import axios from "axios";
 import { AccountInfo } from "./AccountInfo";
 import { useNavigate } from "react-router-dom";
 import { Appbar } from "./Appbar";
+import { BACKEND_URL } from "../config";
 
 export const UserInfo = () => {
     const [info, setInfo] = useState({});
@@ -10,7 +11,7 @@ export const UserInfo = () => {
 
     useEffect(() => {
         axios
-            .get("https://paysec-backend.onrender.com/api/v1/user/info", {
+            .get(`${BACKEND_URL}/user/info`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),
                 },

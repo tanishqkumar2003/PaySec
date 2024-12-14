@@ -40,7 +40,8 @@ export const Signin = () => {
                 const response = await axios.post(`${BACKEND_URL}/user/signin`, {
                   username,
                   password
-                });
+                });                
+                localStorage.setItem("username", username);
                 localStorage.setItem("token", response.data.token);
                 if (response.data.token == undefined) {
                   alert("Wrong Credentials. Try again.");

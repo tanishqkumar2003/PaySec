@@ -48,7 +48,8 @@ export const Send = () => {
                             if(amount){
                                 axios.post(`${BACKEND_URL}/account/transfer`,{
                                     to: id,
-                                    amount
+                                    amount,
+                                    email: localStorage.getItem("username")
                                 },{
                                     headers:{
                                         Authorization: "Bearer " + localStorage.getItem("token")

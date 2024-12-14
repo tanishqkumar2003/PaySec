@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { Button } from "./Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../config";
 
 export const Users = () => {
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        axios.get("https://paysec-backend.onrender.com/api/v1/user/bulk?filter=" + filter, {
+        axios.get(`${BACKEND_URL}/user/bulk?filter=` + filter, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
             }

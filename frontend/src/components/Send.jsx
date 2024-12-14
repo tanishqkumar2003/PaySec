@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../config";
 
 export const Send = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -45,7 +46,7 @@ export const Send = () => {
                     <button onClick={()=>{
                         try {
                             if(amount){
-                                axios.post("https://paysec-backend.onrender.com/api/v1/account/transfer",{
+                                axios.post(`${BACKEND_URL}/account/transfer`,{
                                     to: id,
                                     amount
                                 },{

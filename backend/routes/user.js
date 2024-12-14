@@ -15,45 +15,52 @@ router.post("/signup", async (req, res) => {
             message: "Incorrect inputs"
         })
     }
+    try {
+        const existingUser = await User.findOne({
+          username: req.body.username,
+        });
 
-    const existingUser = await User.findOne({
-        username: req.body.username
-    })
+        if (existingUser) {
+          return res.status(411).json({
+            message: "Email already taken",
+          });
+        }
 
-    if (existingUser) {
-        return res.status(411).json({
-            message: "Email already taken"
-        })
+        const password = req.body.password;
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = await User.create({
+          username: req.body.username,
+          password: hashedPassword,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+        });
+        const userId = user._id;
+
+        await Account.create({
+          userId,
+          balance: Math.floor(1 + Math.random() * 10000),
+        });
+
+        await Transaction.create({
+          userId,
+        });
+
+        const token = jwt.sign(
+          {
+            userId,
+          },
+          JWT_SECRET
+        );
+
+        res.json({
+          message: "User created successfully",
+          token: token,
+        });
+    } catch (error) {
+        return res.json({message: error})
     }
-
-    const password = req.body.password;
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const user = await User.create({
-        username: req.body.username,
-        password: hashedPassword,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-    })
-    const userId = user._id;
-
-    await Account.create({
-        userId,
-        balance: Math.floor(1 + Math.random() * 10000)
-    })
-
-    await Transaction.create({
-        userId,
-    })
-
-    const token = jwt.sign({
-        userId
-    }, JWT_SECRET);
-
-    res.json({
-        message: "User created successfully",
-        token: token
-    })
+    
 })
 
 
@@ -65,34 +72,44 @@ router.post("/signin", async (req, res) => {
             })
         }
         // const password =  req.body.password
-        
+        try {
+            const user = await User.findOne({
+              username: req.body.username,
+              // password: req.body.password
+            });
 
-        const user = await User.findOne({
-            username: req.body.username,
-            // password: req.body.password
-        })
+            const password = req.body.password;
+            const isPasswordMatch = await bcrypt.compare(
+              password,
+              user.password
+            );
+            if (!isPasswordMatch) {
+              return res.status(411).json({
+                message: "incorrect password",
+              });
+            }
 
-        const password = req.body.password;
-        const isPasswordMatch = await bcrypt.compare(password, user.password);
-        if (!isPasswordMatch) {
-          return res.status(411).json({
-            message: "incorrect password",
-          });
-        }
+            if (user) {
+              const token = jwt.sign(
+                {
+                  userId: user._id,
+                },
+                JWT_SECRET
+              );
+              res.json({
+                token: token,
+              });
+              return;
+            }
 
-        if(user){
-            const token = jwt.sign({
-                userId: user._id
-            }, JWT_SECRET)
-            res.json({
-                token: token
+            res.status(411).json({
+              message: "Error while logging in",
+            });
+        } catch (error) {
+            return res.json({
+                message: error
             })
-            return;
         }
-
-        res.status(411).json({
-            message: "Error while logging in"
-        })
 
 })
 

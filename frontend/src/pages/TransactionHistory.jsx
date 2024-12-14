@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Appbar } from '../components/Appbar';
+import { BACKEND_URL } from '../config';
 
 export const TransactionHistory = () => {
     const [transactions, setTransactions] = useState([]);
@@ -10,7 +11,7 @@ export const TransactionHistory = () => {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const response = await axios.get("https://paysec-backend.onrender.com/api/v1/account/transactions", {
+                const response = await axios.get(`${BACKEND_URL}/account/transactions`, {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("token"),
                     },

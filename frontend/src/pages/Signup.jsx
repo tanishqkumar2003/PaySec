@@ -6,6 +6,7 @@ import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../config";
 
 export const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -16,7 +17,7 @@ export const Signup = () => {
 
   const handleSignUp = async () => {
     try {
-      const response = await axios.post("https://paysec-backend.onrender.com/api/v1/user/signup", {
+      const response = await axios.post(`${BACKEND_URL}/user/signup`, {
         username,
         firstName,
         lastName,
